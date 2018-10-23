@@ -1,9 +1,9 @@
-package bsuir;
+package application;
 /*
   Created by Gleb Remniov and Christina Kovalevich.
   Cooperate: remniov.work@gmail.com
 
-  Design: Gleb Remniov. All images and psd in folder "images"
+  Design: Gleb Remniov. All assets and psd in folder "assets"
  */
 
 import javafx.application.Application;
@@ -23,7 +23,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.setOnCloseRequest(event->System.exit(0));  //При закрытии окна, завершение работы всей программы
         primaryStage.setResizable(false);
-        primaryStage.getIcons().addAll(new Image("bsuir/images/icon1.png"));
+        primaryStage.getIcons().addAll(new Image("application/assets/icon1.png"));
         primaryStage.show();
     }
     public static void main(String[] args) {

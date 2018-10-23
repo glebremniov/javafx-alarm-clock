@@ -1,4 +1,4 @@
-package bsuir;
+package application;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -74,7 +74,7 @@ public class Controller {
             return null;
         }
     };
-    private Task<Void> task3 =new Task<Void>() {
+    private Task<Void> task3 = new Task<Void>() {
         protected Void call() throws Exception {
             for (int i = 0; i < 500; i++) {
                 Thread.sleep(10);

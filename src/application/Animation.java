@@ -1,4 +1,4 @@
-package bsuir;
+package application;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;

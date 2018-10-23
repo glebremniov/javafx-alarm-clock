@@ -21,9 +21,8 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("");
         primaryStage.setScene(new Scene(root, 400, 600));
-        primaryStage.setOnCloseRequest(event->System.exit(0));  //При закрытии окна, завершение работы всей программы
+        primaryStage.setOnCloseRequest(event -> System.exit(0));  //При закрытии окна, завершение работы всей программы
         primaryStage.setResizable(false);
-        primaryStage.getIcons().addAll(new Image("application/assets/icon1.png"));
         primaryStage.show();
     }
     public static void main(String[] args) {

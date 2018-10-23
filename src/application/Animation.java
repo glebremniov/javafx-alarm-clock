@@ -4,8 +4,9 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-public class Animation { //Класс с анимацией
-    public static void animateNode(Node node){
+class Animation {
+
+    static void animateNode(Node node){
         TranslateTransition transition = new TranslateTransition(Duration.millis(50),node);
         transition.setFromX(0);
         transition.setFromY(0);

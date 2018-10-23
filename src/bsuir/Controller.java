@@ -55,7 +55,7 @@ public class Controller {
         comboMM.setValue(null);
     }
 
-    private Task<Void> task1 = new Task<>() {   //Конструкция для правильного взаимодействия с UI потоками
+    private Task<Void> task1 = new Task<Void>() {   //Конструкция для правильного взаимодействия с UI потоками
         protected Void call() throws Exception {
             for (int i = 0; i < 72000; i++) { //Чтобы изменить время работы программы нужно изменить условие i<72000
                 Thread.sleep(500);
@@ -65,7 +65,7 @@ public class Controller {
         }
     };
 
-    private Task<Void> task2 = new Task<>() {   //По аналогии делаем task для будильника
+    private Task<Void> task2 = new Task<Void>() {   //По аналогии делаем task для будильника
         protected Void call() throws Exception {
             for (int i = 0; i < 72000; i++) {
                 Thread.sleep(500);
@@ -74,7 +74,7 @@ public class Controller {
             return null;
         }
     };
-    private Task<Void> task3 = new Task<>() {
+    private Task<Void> task3 =new Task<Void>() {
         protected Void call() throws Exception {
             for (int i = 0; i < 500; i++) {
                 Thread.sleep(10);

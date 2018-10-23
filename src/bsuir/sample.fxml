@@ -3,7 +3,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2e3348;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsuir.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #2e3348;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bsuir.Controller">
    <children>
       <ImageView fitHeight="400.0" fitWidth="400.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,24 +20,16 @@
             <DropShadow color="#00000080" height="118.85" radius="49.2275" width="80.06" />
          </effect>
       </ImageView>
-      <ImageView fx:id="imageRolex" fitHeight="150.0" fitWidth="100.0" layoutX="149.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/rolex.png" />
-         </image>
-         <effect>
-            <Glow level="1.0" />
-         </effect>
-      </ImageView>
       <Rectangle arcWidth="5.0" fill="#697ec4" height="70.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="400.0">
          <effect>
             <DropShadow color="#00000080" offsetY="2.0" radius="4.75" width="0.0" />
          </effect></Rectangle>
       <Label alignment="CENTER" prefHeight="70.0" prefWidth="400.0" text="Будильник" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="28.0" />
+            <Font name="Helvetica Neue" size="28.0" />
          </font>
          <effect>
-            <DropShadow color="#000000b2" offsetY="2.0" />
+            <DropShadow color="#00000033" offsetY="2.0" />
          </effect>
       </Label>
       <Label fx:id="labelSeconds" alignment="CENTER" layoutX="234.0" layoutY="479.0" text="00" textAlignment="CENTER" textFill="#909090">
@@ -49,7 +40,7 @@
             <DropShadow color="#00000080" />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="225.0" layoutY="483.0" text=":" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="225.0" layoutY="483.0" prefHeight="34.0" prefWidth="12.0" text=":" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -65,7 +56,7 @@
             <DropShadow color="#00000080" />
          </effect>
       </Label>
-      <Label alignment="CENTER" layoutX="172.0" layoutY="483.0" text=":" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="172.0" layoutY="483.0" prefHeight="34.0" prefWidth="12.0" text=":" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="28.0" />
          </font>
@@ -169,7 +160,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Label layoutX="187.0" layoutY="172.0" text="12" textFill="WHITE">
+      <Label layoutX="187.0" layoutY="180.0" text="12" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

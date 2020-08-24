@@ -31,7 +31,7 @@ public class Controller {
     private short currentHour;     // Переменная для текущего часа
     private short alarmMinute = -1;     // Переменная для будильника(минуты)
     private short alarmHour = -1;       // Переменная для будильника (часы)
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Для корректного преобразования текущего времени
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Для корректного преобразования текущего времени
     private boolean isTurnOff = false;
 
     @FXML
@@ -39,39 +39,39 @@ public class Controller {
         new Thread(task1).start();
         new Thread(task2).start();
 
-        String[] arrayMinutes = new String[61];    //Массивы из значений для выбора времени будильника
+        String[] arrayMinutes = new String[61];    // Массивы из значений для выбора времени будильника
         String[] arrayHours = new String[25];      // 61 и 25 для того чтобы было еще специальное значение none которое отключает будильник
         arrayMinutes[0] = "none";
         arrayHours[0] = "none";
 
         for (int i = 1; i < 61; i++) {
-            arrayMinutes[i] = i < 11 ? "0" + String.valueOf(i - 1) : String.valueOf(i - 1);
+            arrayMinutes[i] = i < 11 ? "0" + (i - 1) : String.valueOf(i - 1);
         }
 
         for (int i = 1; i < 25; i++) {
-            arrayHours[i] = i < 11 ? "0" + String.valueOf(i - 1) : String.valueOf(i - 1);
+            arrayHours[i] = i < 11 ? "0" + (i - 1) : String.valueOf(i - 1);
         }
 
-        ObservableList<String> listHours = FXCollections.observableArrayList(arrayHours); //ObservableList для правильного взаимодействия с ComboBox
+        ObservableList<String> listHours = FXCollections.observableArrayList(arrayHours); // ObservableList для правильного взаимодействия с ComboBox
         ObservableList<String> listMinutes = FXCollections.observableArrayList(arrayMinutes);
 
-        comboHH.setItems(listHours); //Заполняем комбобоксы значениями
+        comboHH.setItems(listHours); // Заполняем комбобоксы значениями
         comboMM.setItems(listMinutes);
         comboHH.setValue(null);
         comboMM.setValue(null);
     }
 
-    private Task<Void> task1 = new Task<Void>() {   //Конструкция для правильного взаимодействия с UI потоками
+    private final Task<Void> task1 = new Task<>() {   // Конструкция для правильного взаимодействия с UI потоками
         protected Void call() throws Exception {
-            for (int i = 0; i < 72000; i++) { //Чтобы изменить время работы программы нужно изменить условие i<72000
+            for (int i = 0; i < 72000; i++) { // Чтобы изменить время работы программы нужно изменить условие i<72000
                 Thread.sleep(500);
-                Platform.runLater(() -> showRealTime()); //Вызов фунцции будет отсуществляться 72000 раз с интервалом в полсекунды, т.е в течение 36000 секунд
+                Platform.runLater(() -> showRealTime()); // Вызов фунцции будет отсуществляться 72000 раз с интервалом в полсекунды, т.е в течение 36000 секунд
             }
             return null;
         }
     };
 
-    private Task<Void> task2 = new Task<Void>() {   //По аналогии делаем task для будильника
+    private final Task<Void> task2 = new Task<>() {   // По аналогии делаем task для будильника
         protected Void call() throws Exception {
             for (int i = 0; i < 72000; i++) {
                 Thread.sleep(500);
@@ -98,9 +98,9 @@ public class Controller {
     private void showRealTime() {
         String currentTime = LocalTime.now().format(dateTimeFormatter);
         String[] strings = currentTime.split(":");
-        currentHour = Short.valueOf(strings[0]);
-        currentMinute = Short.valueOf(strings[1]);
-        short currentSeconds = Short.valueOf(strings[2]);
+        currentHour = Short.parseShort(strings[0]);
+        currentMinute = Short.parseShort(strings[1]);
+        short currentSeconds = Short.parseShort(strings[2]);
         imageHour.setRotate(currentHour * 30 + currentMinute / 2);
         imageMinute.setRotate(currentMinute * 6 + currentSeconds / 10);
         imageSeconds.setRotate(currentSeconds * 6);
@@ -110,17 +110,17 @@ public class Controller {
         labelSeconds.setText(currentSeconds < 10 ? "0" + String.valueOf(currentSeconds) : String.valueOf(currentSeconds));
     }
 
-    public void actionAddAlarm() { //Метод срабатывает при нажатии на кнопку "+"
+    public void actionAddAlarm() { // Метод срабатывает при нажатии на кнопку "+"
         System.out.println("Add alarm");
         comboHH.setVisible(true);
         comboMM.setVisible(true);
         comboHH.setValue(String.valueOf(currentHour));
         comboMM.setValue(String.valueOf(currentMinute + 1));
-        comboMM.setValue(currentMinute + 1 < 10 ? "0" + String.valueOf(currentMinute + 1) : String.valueOf(currentMinute + 1));
+        comboMM.setValue(currentMinute + 1 < 10 ? "0" + (currentMinute + 1) : String.valueOf(currentMinute + 1));
         alarmRectangle.setVisible(true);
     }
 
-    public void actionPlayAlarm() { //Метод срабатывает при взаимодействии с комбобоксами
+    public void actionPlayAlarm() { // Метод срабатывает при взаимодействии с комбобоксами
         if (comboMM.getValue() != null && comboHH.getValue() != null) {
             if (comboMM.getValue().equals("none") || comboHH.getValue().equals("none")) {
                 labelInfo.setText("Будильник отключён.");
@@ -142,7 +142,7 @@ public class Controller {
         }
     }
 
-    public void actionTurnOffAlarm() { //Метод для отключение будильника, срабатывает при нажатии на labelInfo
+    public void actionTurnOffAlarm() { // Метод для отключение будильника, срабатывает при нажатии на labelInfo
         if (!isTurnOff) {
             isTurnOff = true;
             comboHH.setValue("none");

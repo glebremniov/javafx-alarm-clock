@@ -1,4 +1,4 @@
-package application;
+package com.glebremniov.javafxAlarmClock;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -31,24 +32,24 @@ public class Controller {
     private short alarmMinute = -1;     // Переменная для будильника(минуты)
     private short alarmHour = -1;       // Переменная для будильника (часы)
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss"); // Для корректного преобразования текущего времени
-    private boolean isTurnOff= false;
+    private boolean isTurnOff = false;
 
     @FXML
     protected void initialize() {
         new Thread(task1).start();
         new Thread(task2).start();
 
-        String [] arrayMinutes = new String[61];    //Массивы из значений для выбора времени будильника
-        String [] arrayHours = new String[25];      // 61 и 25 для того чтобы было еще специальное значение none которое отключает будильник
+        String[] arrayMinutes = new String[61];    //Массивы из значений для выбора времени будильника
+        String[] arrayHours = new String[25];      // 61 и 25 для того чтобы было еще специальное значение none которое отключает будильник
         arrayMinutes[0] = "none";
         arrayHours[0] = "none";
 
-        for (int i = 1; i < 61; i++){
-            arrayMinutes[i] = i < 11 ? "0" + String.valueOf(i-1) : String.valueOf(i-1);
+        for (int i = 1; i < 61; i++) {
+            arrayMinutes[i] = i < 11 ? "0" + String.valueOf(i - 1) : String.valueOf(i - 1);
         }
 
-        for (int i = 1; i < 25; i++){
-            arrayHours[i] = i < 11 ? "0" + String.valueOf(i-1) : String.valueOf(i-1);
+        for (int i = 1; i < 25; i++) {
+            arrayHours[i] = i < 11 ? "0" + String.valueOf(i - 1) : String.valueOf(i - 1);
         }
 
         ObservableList<String> listHours = FXCollections.observableArrayList(arrayHours); //ObservableList для правильного взаимодействия с ComboBox
@@ -80,8 +81,8 @@ public class Controller {
         }
     };
 
-    private void checkAlarm(){
-        if (currentHour == alarmHour && currentMinute == alarmMinute){
+    private void checkAlarm() {
+        if (currentHour == alarmHour && currentMinute == alarmMinute) {
             if (!isTurnOff) {
                 labelInfo.setText("Нажмите сюда, чтобы\nотключить будильник.");
                 comboMM.setVisible(false);
@@ -109,40 +110,39 @@ public class Controller {
         labelSeconds.setText(currentSeconds < 10 ? "0" + String.valueOf(currentSeconds) : String.valueOf(currentSeconds));
     }
 
-    public void actionAddAlarm(){ //Метод срабатывает при нажатии на кнопку "+"
+    public void actionAddAlarm() { //Метод срабатывает при нажатии на кнопку "+"
         System.out.println("Add alarm");
         comboHH.setVisible(true);
         comboMM.setVisible(true);
         comboHH.setValue(String.valueOf(currentHour));
         comboMM.setValue(String.valueOf(currentMinute + 1));
-        comboMM.setValue(currentMinute + 1 <10 ? "0" + String.valueOf(currentMinute + 1) : String.valueOf(currentMinute + 1));
+        comboMM.setValue(currentMinute + 1 < 10 ? "0" + String.valueOf(currentMinute + 1) : String.valueOf(currentMinute + 1));
         alarmRectangle.setVisible(true);
     }
 
-    public void actionPlayAlarm(){ //Метод срабатывает при взаимодействии с комбобоксами
-        if (comboMM.getValue()!=null && comboHH.getValue()!=null){
-            if (comboMM.getValue().equals("none") || comboHH.getValue().equals("none")){
+    public void actionPlayAlarm() { //Метод срабатывает при взаимодействии с комбобоксами
+        if (comboMM.getValue() != null && comboHH.getValue() != null) {
+            if (comboMM.getValue().equals("none") || comboHH.getValue().equals("none")) {
                 labelInfo.setText("Будильник отключён.");
                 comboHH.setVisible(false);
                 comboMM.setVisible(false);
                 alarmRectangle.setVisible(false);
                 isTurnOff = true;
-            }
-
-            else {
+            } else {
                 isTurnOff = false;
                 alarmMinute = Short.parseShort(comboMM.getValue());
 //                alarmMinutes = alarmMinutes>=59? alarmMinutes : alarmMinutes++;
                 alarmHour = Short.parseShort(comboHH.getValue());
                 comboHH.setVisible(true);
                 comboMM.setVisible(true);
-                labelInfo.setText("Будильник установлен на " + (alarmHour<10 ? "0" + alarmHour : alarmHour) + ":" + (alarmMinute < 10 ? "0" + alarmMinute : alarmMinute) + ".\nНажмите, чтобы отключить.");
+                labelInfo.setText("Будильник установлен на " + (alarmHour < 10 ? "0" + alarmHour : alarmHour) + ":" + (alarmMinute < 10 ? "0" + alarmMinute : alarmMinute) + ".\nНажмите, чтобы отключить.");
 
                 System.out.println("Alarm time: " + alarmHour + ":" + alarmMinute);
             }
         }
     }
-    public void actionTurnOffAlarm(){ //Метод для отключение будильника, срабатывает при нажатии на labelInfo
+
+    public void actionTurnOffAlarm() { //Метод для отключение будильника, срабатывает при нажатии на labelInfo
         if (!isTurnOff) {
             isTurnOff = true;
             comboHH.setValue("none");

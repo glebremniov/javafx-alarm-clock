@@ -1,4 +1,4 @@
-package application;
+package com.glebremniov.javafxAlarmClock;
 
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
@@ -6,8 +6,8 @@ import javafx.util.Duration;
 
 class Animation {
 
-    static void animateNode(Node node){
-        TranslateTransition transition = new TranslateTransition(Duration.millis(50),node);
+    static void animateNode(Node node) {
+        TranslateTransition transition = new TranslateTransition(Duration.millis(50), node);
         transition.setFromX(0);
         transition.setFromY(0);
         transition.setToX(2.5);
